@@ -1,0 +1,3 @@
+[submodule "gobbledegook"]
+	path = gobbledegook
+	url = https://github.com/ctrekker/gobbledegook.git
