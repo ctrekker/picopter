@@ -2,12 +2,12 @@
 #include <vector>
 #include <string>
 
+#include "src/Quaternion.h"
+
 int main()
 {
-    std::vector<std::string> msg {"Hello", "C++", "Autotools", "from", "VS Code", "and the C++ extension!"};
+    Quaternion q1(1., 0., 0., 0.);
+    Quaternion q2(0., 1., 0., 0.);
 
-    for (const std::string& word : msg) {
-	std::cout << word << " ";
-    }
-    std::cout << std::endl;
+    std::cout << (q1 + q2) << std::endl;
 }
