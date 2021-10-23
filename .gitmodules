@@ -1,3 +1,6 @@
 [submodule "ggk"]
 	path = ggk
 	url = https://github.com/ctrekker/gobbledegook.git
+[submodule "eigen"]
+	path = eigen
+	url = https://gitlab.com/libeigen/eigen.git
