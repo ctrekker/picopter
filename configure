@@ -698,7 +698,7 @@ CC
 CFLAGS'
 ac_subdirs_all='
  src
- gobbledegook
+ ggk
 '
 
 # Initialize some variables set by options.
@@ -4148,7 +4148,7 @@ esac
 AX_CXX_COMPILE_STDCXX_17
 
 
-subdirs="$subdirs src gobbledegook"
+subdirs="$subdirs src ggk"
 
 ac_config_files="$ac_config_files Makefile src/Makefile"
 

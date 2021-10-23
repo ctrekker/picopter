@@ -6,7 +6,7 @@ AM_PROG_AR
 AX_CXX_COMPILE_STDCXX_17
 AC_CONFIG_SUBDIRS([
  src
- gobbledegook
+ ggk
 ])
 AC_CONFIG_FILES([
  Makefile

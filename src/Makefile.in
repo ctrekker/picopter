@@ -103,7 +103,7 @@ am__v_AR_0 = @echo "  AR      " $@;
 am__v_AR_1 = 
 libpicopter_a_AR = $(AR) $(ARFLAGS)
 libpicopter_a_LIBADD =
-am_libpicopter_a_OBJECTS = Quaternion.$(OBJEXT)
+am_libpicopter_a_OBJECTS = libpicopter_a-Quaternion.$(OBJEXT)
 libpicopter_a_OBJECTS = $(am_libpicopter_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -120,8 +120,12 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/Quaternion.Po
+am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-Quaternion.Po
 am__mv = mv -f
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_@AM_V@)
@@ -272,6 +276,7 @@ noinst_LIBRARIES = libpicopter.a
 libpicopter_a_SOURCES = Quaternion.cpp \
 			Quaternion.h
 
+libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen
 all: all-am
 
 .SUFFIXES:
@@ -320,7 +325,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quaternion.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Quaternion.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -341,6 +346,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+libpicopter_a-Quaternion.o: Quaternion.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Quaternion.o -MD -MP -MF $(DEPDIR)/libpicopter_a-Quaternion.Tpo -c -o libpicopter_a-Quaternion.o `test -f 'Quaternion.cpp' || echo '$(srcdir)/'`Quaternion.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Quaternion.Tpo $(DEPDIR)/libpicopter_a-Quaternion.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Quaternion.cpp' object='libpicopter_a-Quaternion.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Quaternion.o `test -f 'Quaternion.cpp' || echo '$(srcdir)/'`Quaternion.cpp
+
+libpicopter_a-Quaternion.obj: Quaternion.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Quaternion.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-Quaternion.Tpo -c -o libpicopter_a-Quaternion.obj `if test -f 'Quaternion.cpp'; then $(CYGPATH_W) 'Quaternion.cpp'; else $(CYGPATH_W) '$(srcdir)/Quaternion.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Quaternion.Tpo $(DEPDIR)/libpicopter_a-Quaternion.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Quaternion.cpp' object='libpicopter_a-Quaternion.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Quaternion.obj `if test -f 'Quaternion.cpp'; then $(CYGPATH_W) 'Quaternion.cpp'; else $(CYGPATH_W) '$(srcdir)/Quaternion.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -466,7 +485,7 @@ clean: clean-am
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/Quaternion.Po
+		-rm -f ./$(DEPDIR)/libpicopter_a-Quaternion.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -512,7 +531,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/Quaternion.Po
+		-rm -f ./$(DEPDIR)/libpicopter_a-Quaternion.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
