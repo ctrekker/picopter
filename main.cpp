@@ -11,6 +11,7 @@ using namespace Eigen;
 #include "src/DroneState.h"
 #include "src/Simulation.h"
 #include "src/CraftProperties.h"
+#include "src/Timer.h"
 
 Vector4f noThrust(DroneState3d s, float t) {
     return Vector4f(0, 0, 0, 0);
@@ -38,10 +39,13 @@ int main()
         100  // max thrust
     };
 
-    std::vector<DroneState3d> states = simulate(properties, initialState, noThrust, 0.1, 5);
+    Timer t;
+    t.start();
+    std::vector<DroneState3d> states = simulate(properties, initialState, noThrust, 0.001, 60);
+    std::cout << "Simulation took " << t.stop() << "ms" << std::endl;
 
-    std::cout << "===== Simulation Data =====" << std::endl;
-    std::cout << states << std::endl;
+    // std::cout << "===== Simulation Data =====" << std::endl;
+    // std::cout << states << std::endl;
 
     return 0;
 }

@@ -8,5 +8,7 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						PIDController.h \
 						Simulation.cpp \
 						Simulation.h \
+						Timer.cpp \
+						Timer.h \
 						VariadicTable.h
 libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen

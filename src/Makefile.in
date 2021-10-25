@@ -106,7 +106,8 @@ libpicopter_a_LIBADD =
 am_libpicopter_a_OBJECTS = libpicopter_a-BTLEServer.$(OBJEXT) \
 	libpicopter_a-DroneState.$(OBJEXT) \
 	libpicopter_a-PIDController.$(OBJEXT) \
-	libpicopter_a-Simulation.$(OBJEXT)
+	libpicopter_a-Simulation.$(OBJEXT) \
+	libpicopter_a-Timer.$(OBJEXT)
 libpicopter_a_OBJECTS = $(am_libpicopter_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -126,7 +127,8 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-BTLEServer.Po \
 	./$(DEPDIR)/libpicopter_a-DroneState.Po \
 	./$(DEPDIR)/libpicopter_a-PIDController.Po \
-	./$(DEPDIR)/libpicopter_a-Simulation.Po
+	./$(DEPDIR)/libpicopter_a-Simulation.Po \
+	./$(DEPDIR)/libpicopter_a-Timer.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -288,6 +290,8 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						PIDController.h \
 						Simulation.cpp \
 						Simulation.h \
+						Timer.cpp \
+						Timer.h \
 						VariadicTable.h
 
 libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen
@@ -343,6 +347,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-DroneState.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-PIDController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Simulation.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Timer.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -419,6 +424,20 @@ libpicopter_a-Simulation.obj: Simulation.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Simulation.cpp' object='libpicopter_a-Simulation.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Simulation.obj `if test -f 'Simulation.cpp'; then $(CYGPATH_W) 'Simulation.cpp'; else $(CYGPATH_W) '$(srcdir)/Simulation.cpp'; fi`
+
+libpicopter_a-Timer.o: Timer.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Timer.o -MD -MP -MF $(DEPDIR)/libpicopter_a-Timer.Tpo -c -o libpicopter_a-Timer.o `test -f 'Timer.cpp' || echo '$(srcdir)/'`Timer.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Timer.Tpo $(DEPDIR)/libpicopter_a-Timer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Timer.cpp' object='libpicopter_a-Timer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Timer.o `test -f 'Timer.cpp' || echo '$(srcdir)/'`Timer.cpp
+
+libpicopter_a-Timer.obj: Timer.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Timer.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-Timer.Tpo -c -o libpicopter_a-Timer.obj `if test -f 'Timer.cpp'; then $(CYGPATH_W) 'Timer.cpp'; else $(CYGPATH_W) '$(srcdir)/Timer.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Timer.Tpo $(DEPDIR)/libpicopter_a-Timer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Timer.cpp' object='libpicopter_a-Timer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Timer.obj `if test -f 'Timer.cpp'; then $(CYGPATH_W) 'Timer.cpp'; else $(CYGPATH_W) '$(srcdir)/Timer.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -548,6 +567,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-PIDController.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -597,6 +617,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-PIDController.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
