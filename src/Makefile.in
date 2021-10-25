@@ -104,7 +104,9 @@ am__v_AR_1 =
 libpicopter_a_AR = $(AR) $(ARFLAGS)
 libpicopter_a_LIBADD =
 am_libpicopter_a_OBJECTS = libpicopter_a-BTLEServer.$(OBJEXT) \
-	libpicopter_a-PIDController.$(OBJEXT)
+	libpicopter_a-DroneState.$(OBJEXT) \
+	libpicopter_a-PIDController.$(OBJEXT) \
+	libpicopter_a-Simulation.$(OBJEXT)
 libpicopter_a_OBJECTS = $(am_libpicopter_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -122,7 +124,9 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-BTLEServer.Po \
-	./$(DEPDIR)/libpicopter_a-PIDController.Po
+	./$(DEPDIR)/libpicopter_a-DroneState.Po \
+	./$(DEPDIR)/libpicopter_a-PIDController.Po \
+	./$(DEPDIR)/libpicopter_a-Simulation.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -276,9 +280,13 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 noinst_LIBRARIES = libpicopter.a
 libpicopter_a_SOURCES = BTLEServer.cpp \
-			BTLEServer.h \
-			PIDController.cpp \
-			PIDController.h
+						BTLEServer.h \
+						DroneState.cpp \
+						DroneState.h \
+						PIDController.cpp \
+						PIDController.h \
+						Simulation.cpp \
+						Simulation.h
 
 libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen
 all: all-am
@@ -330,7 +338,9 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-BTLEServer.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-DroneState.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-PIDController.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Simulation.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -366,6 +376,20 @@ libpicopter_a-BTLEServer.obj: BTLEServer.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-BTLEServer.obj `if test -f 'BTLEServer.cpp'; then $(CYGPATH_W) 'BTLEServer.cpp'; else $(CYGPATH_W) '$(srcdir)/BTLEServer.cpp'; fi`
 
+libpicopter_a-DroneState.o: DroneState.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-DroneState.o -MD -MP -MF $(DEPDIR)/libpicopter_a-DroneState.Tpo -c -o libpicopter_a-DroneState.o `test -f 'DroneState.cpp' || echo '$(srcdir)/'`DroneState.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-DroneState.Tpo $(DEPDIR)/libpicopter_a-DroneState.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='DroneState.cpp' object='libpicopter_a-DroneState.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-DroneState.o `test -f 'DroneState.cpp' || echo '$(srcdir)/'`DroneState.cpp
+
+libpicopter_a-DroneState.obj: DroneState.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-DroneState.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-DroneState.Tpo -c -o libpicopter_a-DroneState.obj `if test -f 'DroneState.cpp'; then $(CYGPATH_W) 'DroneState.cpp'; else $(CYGPATH_W) '$(srcdir)/DroneState.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-DroneState.Tpo $(DEPDIR)/libpicopter_a-DroneState.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='DroneState.cpp' object='libpicopter_a-DroneState.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-DroneState.obj `if test -f 'DroneState.cpp'; then $(CYGPATH_W) 'DroneState.cpp'; else $(CYGPATH_W) '$(srcdir)/DroneState.cpp'; fi`
+
 libpicopter_a-PIDController.o: PIDController.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-PIDController.o -MD -MP -MF $(DEPDIR)/libpicopter_a-PIDController.Tpo -c -o libpicopter_a-PIDController.o `test -f 'PIDController.cpp' || echo '$(srcdir)/'`PIDController.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-PIDController.Tpo $(DEPDIR)/libpicopter_a-PIDController.Po
@@ -379,6 +403,20 @@ libpicopter_a-PIDController.obj: PIDController.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='PIDController.cpp' object='libpicopter_a-PIDController.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-PIDController.obj `if test -f 'PIDController.cpp'; then $(CYGPATH_W) 'PIDController.cpp'; else $(CYGPATH_W) '$(srcdir)/PIDController.cpp'; fi`
+
+libpicopter_a-Simulation.o: Simulation.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Simulation.o -MD -MP -MF $(DEPDIR)/libpicopter_a-Simulation.Tpo -c -o libpicopter_a-Simulation.o `test -f 'Simulation.cpp' || echo '$(srcdir)/'`Simulation.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Simulation.Tpo $(DEPDIR)/libpicopter_a-Simulation.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Simulation.cpp' object='libpicopter_a-Simulation.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Simulation.o `test -f 'Simulation.cpp' || echo '$(srcdir)/'`Simulation.cpp
+
+libpicopter_a-Simulation.obj: Simulation.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Simulation.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-Simulation.Tpo -c -o libpicopter_a-Simulation.obj `if test -f 'Simulation.cpp'; then $(CYGPATH_W) 'Simulation.cpp'; else $(CYGPATH_W) '$(srcdir)/Simulation.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Simulation.Tpo $(DEPDIR)/libpicopter_a-Simulation.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Simulation.cpp' object='libpicopter_a-Simulation.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Simulation.obj `if test -f 'Simulation.cpp'; then $(CYGPATH_W) 'Simulation.cpp'; else $(CYGPATH_W) '$(srcdir)/Simulation.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -505,7 +543,9 @@ clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-PIDController.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -552,7 +592,9 @@ installcheck-am:
 
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-PIDController.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
