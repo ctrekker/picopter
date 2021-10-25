@@ -1,20 +1,21 @@
 #pragma once
 
+#include <vector>
 #include <Eigen/Geometry>
-// #include <Eigen/Dense>
 
 using namespace Eigen;
 
 class DroneState3d {
     public:
-        Vector3d p;
+        Vector3f p;
         Quaternion<float> q;
-        Vector3d v;
+        Vector3f v;
         float w;     // scalar angular velocity
-        Vector3d a;  // axis of rotation
+        Vector3f a;  // axis of rotation
 
         DroneState3d();
-        DroneState3d(Vector3d p, Quaternion<float> q, Vector3d v, float w, Vector3d a);
+        DroneState3d(Vector3f p, Quaternion<float> q, Vector3f v, float w, Vector3f a);
 };
 
 std::ostream& operator<<(std::ostream& os, const DroneState3d& s);
+std::ostream& operator<<(std::ostream& os, const std::vector<DroneState3d>& s);
