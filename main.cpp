@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
 #include <math.h>
+
 #include <Eigen/Geometry>
 #include <Eigen/Dense>
+
+#include <pigpio.h>
 
 using namespace Eigen;
 
@@ -13,12 +15,13 @@ using namespace Eigen;
 #include "src/CraftProperties.h"
 #include "src/Timer.h"
 
+#include "src/sensors/ADXL345.h"
+
 Vector4f noThrust(DroneState3d s, float t) {
     return Vector4f(0, 0, 0, 0);
 }
 
-int main()
-{
+void simulate() {
     DroneState3d initialState(
         Vector3f(0, 0, 0),
         // angleAxisQuaternion<float>(M_PI / 2, Vector3f(1., 0, 0)),
@@ -46,6 +49,23 @@ int main()
 
     // std::cout << "===== Simulation Data =====" << std::endl;
     // std::cout << states << std::endl;
+}
+
+int main()
+{
+    if(gpioInitialise() < 0) {
+        fprintf(stderr, "pigpio initialisation failed\n");
+        return 1;
+    }
+
+    ADXL345 acc;
+    acc.init();
+
+    while(true) {
+        Vector3f a = acc.readXYZ();
+        std::cout << a.x() << "\t" << a.y() << "\t" << a.z() << std::endl;
+        time_sleep(0.1);
+    }
 
     return 0;
 }
