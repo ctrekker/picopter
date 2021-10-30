@@ -16,9 +16,10 @@ using namespace Eigen;
 #include "src/Timer.h"
 
 // #include "src/sensors/ADXL345.h"
-#include "src/sensors/BMP280.h"
+#include "src/sensors/ITG3200.h"
+// #include "src/sensors/BMP280.h"
 
-#define SEA_LEVEL_PRESSURE    1015.0f   // sea level pressure
+// #define SEA_LEVEL_PRESSURE    1015.0f   // sea level pressure
 
 Vector4f noThrust(DroneState3d s, float t) {
     return Vector4f(0, 0, 0, 0);
@@ -62,15 +63,16 @@ int main()
     }
 
     // ADXL345 acc;
-    BMP280 bar;
+    ITG3200 gyro;
+    // BMP280 bar;
     // acc.init();
-    bar.init();
+    gyro.init();
+    // bar.init();
 
-    while(true) {
-        std::cout << bar.getTemperature() << "," << bar.getPressure() << std::endl;
-        // Vector3f a = acc.readXYZ();
-        // std::cout << a.x() << "\t" << a.y() << "\t" << a.z() << std::endl;
-        time_sleep(0.1);
+    for(int i=0 ;; i++) {
+        Vector3f w = gyro.readXYZ();
+        std::cout << w.x() << "\t" << w.y() << "\t" << w.z() << std::endl;
+        time_sleep(1./10);
     }
 
     return 0;

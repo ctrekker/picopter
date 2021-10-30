@@ -56,6 +56,16 @@ typedef struct {
 
 std::ostream& operator<<(std::ostream& os, const BMP280Calibration& s);
 
+class Pressure {
+    private:
+        float pa;
+    public:
+        Pressure(float pa);
+
+        float pascals();
+        float altitude();  // convert pressure to altitude (on earth)
+};
+
 class BMP280 {
     private:
         int handle;
@@ -70,7 +80,7 @@ class BMP280 {
         void setConfig(uint8_t tStandby, uint8_t filter);
 
         float getTemperature();
-        float getPressure();
+        Pressure getPressure();
         uint32_t getTemperatureRaw();
         uint32_t getPressureRaw();
 };

@@ -1,5 +1,6 @@
 #include <pigpio.h>
 #include <iostream>
+#include <math.h>
 #include "BMP280.h"
 #include "SensorUtils.h"
 
@@ -29,7 +30,7 @@ float BMP280::getTemperature() {
     return (rslt / 100);
 }
 
-float BMP280::getPressure() {
+Pressure BMP280::getPressure() {
     getTemperature();
     int32_t raw = getPressureRaw();
     int64_t rslt = 0;
@@ -63,6 +64,19 @@ uint32_t BMP280::getPressureRaw() {
 
 void BMP280::readCalibration() {
     i2cReadI2CBlockData(handle, BMP280_CALIB, reinterpret_cast<char *>(&cal), sizeof(cal));
+}
+
+
+Pressure::Pressure(float pa) {
+    this->pa = pa;
+}
+
+float Pressure::pascals() {
+    return pa;
+}
+
+ float Pressure::altitude()  {
+    return 44330 * (1.0f - pow(pa / 100 / 1015.0f, 0.1903));
 }
 
 
