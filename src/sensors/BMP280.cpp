@@ -53,12 +53,12 @@ float BMP280::getPressure() {
 uint32_t BMP280::getTemperatureRaw() {
     uint8_t tempBuff[3];
     i2cReadI2CBlockData(handle, BMP280_TEMP_MSB, reinterpret_cast<char *>(&tempBuff), sizeof(tempBuff));
-    return ((uint32_t)tempBuff[0] << 12) | ((uint32_t)tempBuff[1] << 4) | ((uint32_t)tempBuff[0]);
+    return ((uint32_t)tempBuff[0] << 12) | ((uint32_t)tempBuff[1] << 4) | ((uint32_t)tempBuff[2] >> 4);
 }
 uint32_t BMP280::getPressureRaw() {
     uint8_t presBuff[3];
-    i2cReadI2CBlockData(handle, BMP280_TEMP_MSB, reinterpret_cast<char *>(&presBuff), sizeof(presBuff));
-    return ((uint32_t)presBuff[0] << 12) | ((uint32_t)presBuff[1] << 4) | ((uint32_t)presBuff[0]);
+    i2cReadI2CBlockData(handle, BMP280_PRESS_MSB, reinterpret_cast<char *>(&presBuff), sizeof(presBuff));
+    return ((uint32_t)presBuff[0] << 12) | ((uint32_t)presBuff[1] << 4) | ((uint32_t)presBuff[2] >> 4);
 }
 
 void BMP280::readCalibration() {
