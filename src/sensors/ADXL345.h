@@ -5,7 +5,7 @@
 #define ADXL345_READ_LENGTH 6
 #define ADXL345_I2C_ADDR 0x53
 
-// Register names
+// Registers
 #define ADXL345_DEVID 0x00
 #define ADXL345_RESERVED1 0x01
 #define ADXL345_THRESH_TAP 0x1d

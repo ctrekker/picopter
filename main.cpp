@@ -15,7 +15,10 @@ using namespace Eigen;
 #include "src/CraftProperties.h"
 #include "src/Timer.h"
 
-#include "src/sensors/ADXL345.h"
+// #include "src/sensors/ADXL345.h"
+#include "src/sensors/BMP280.h"
+
+#define SEA_LEVEL_PRESSURE    1015.0f   // sea level pressure
 
 Vector4f noThrust(DroneState3d s, float t) {
     return Vector4f(0, 0, 0, 0);
@@ -58,12 +61,15 @@ int main()
         return 1;
     }
 
-    ADXL345 acc;
-    acc.init();
+    // ADXL345 acc;
+    BMP280 bar;
+    // acc.init();
+    bar.init();
 
     while(true) {
-        Vector3f a = acc.readXYZ();
-        std::cout << a.x() << "\t" << a.y() << "\t" << a.z() << std::endl;
+        std::cout << bar.getTemperature() << "," << bar.getPressure() << std::endl;
+        // Vector3f a = acc.readXYZ();
+        // std::cout << a.x() << "\t" << a.y() << "\t" << a.z() << std::endl;
         time_sleep(0.1);
     }
 

@@ -110,6 +110,9 @@ am_libpicopter_a_OBJECTS = libpicopter_a-BTLEServer.$(OBJEXT) \
 	libpicopter_a-Simulation.$(OBJEXT) \
 	libpicopter_a-Timer.$(OBJEXT) \
 	sensors/libpicopter_a-ADXL345.$(OBJEXT) \
+	sensors/libpicopter_a-BMP280.$(OBJEXT) \
+	sensors/libpicopter_a-HMC5883L.$(OBJEXT) \
+	sensors/libpicopter_a-ITG3200.$(OBJEXT) \
 	sensors/libpicopter_a-SensorUtils.$(OBJEXT)
 libpicopter_a_OBJECTS = $(am_libpicopter_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -133,6 +136,9 @@ am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-BTLEServer.Po \
 	./$(DEPDIR)/libpicopter_a-Simulation.Po \
 	./$(DEPDIR)/libpicopter_a-Timer.Po \
 	sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po \
+	sensors/$(DEPDIR)/libpicopter_a-BMP280.Po \
+	sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Po \
+	sensors/$(DEPDIR)/libpicopter_a-ITG3200.Po \
 	sensors/$(DEPDIR)/libpicopter_a-SensorUtils.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -301,6 +307,12 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						VariadicTable.h \
 						sensors/ADXL345.cpp \
 						sensors/ADXL345.h \
+						sensors/BMP280.cpp \
+						sensors/BMP280.h \
+						sensors/HMC5883L.cpp \
+						sensors/HMC5883L.h \
+						sensors/ITG3200.cpp \
+						sensors/ITG3200.h \
 						sensors/SensorUtils.cpp \
 						sensors/SensorUtils.h
 
@@ -349,6 +361,12 @@ sensors/$(DEPDIR)/$(am__dirstamp):
 	@: > sensors/$(DEPDIR)/$(am__dirstamp)
 sensors/libpicopter_a-ADXL345.$(OBJEXT): sensors/$(am__dirstamp) \
 	sensors/$(DEPDIR)/$(am__dirstamp)
+sensors/libpicopter_a-BMP280.$(OBJEXT): sensors/$(am__dirstamp) \
+	sensors/$(DEPDIR)/$(am__dirstamp)
+sensors/libpicopter_a-HMC5883L.$(OBJEXT): sensors/$(am__dirstamp) \
+	sensors/$(DEPDIR)/$(am__dirstamp)
+sensors/libpicopter_a-ITG3200.$(OBJEXT): sensors/$(am__dirstamp) \
+	sensors/$(DEPDIR)/$(am__dirstamp)
 sensors/libpicopter_a-SensorUtils.$(OBJEXT): sensors/$(am__dirstamp) \
 	sensors/$(DEPDIR)/$(am__dirstamp)
 
@@ -370,6 +388,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Simulation.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Timer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-BMP280.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-ITG3200.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-SensorUtils.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
@@ -477,6 +498,48 @@ sensors/libpicopter_a-ADXL345.obj: sensors/ADXL345.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sensors/ADXL345.cpp' object='sensors/libpicopter_a-ADXL345.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sensors/libpicopter_a-ADXL345.obj `if test -f 'sensors/ADXL345.cpp'; then $(CYGPATH_W) 'sensors/ADXL345.cpp'; else $(CYGPATH_W) '$(srcdir)/sensors/ADXL345.cpp'; fi`
+
+sensors/libpicopter_a-BMP280.o: sensors/BMP280.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-BMP280.o -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-BMP280.Tpo -c -o sensors/libpicopter_a-BMP280.o `test -f 'sensors/BMP280.cpp' || echo '$(srcdir)/'`sensors/BMP280.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) sensors/$(DEPDIR)/libpicopter_a-BMP280.Tpo sensors/$(DEPDIR)/libpicopter_a-BMP280.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sensors/BMP280.cpp' object='sensors/libpicopter_a-BMP280.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sensors/libpicopter_a-BMP280.o `test -f 'sensors/BMP280.cpp' || echo '$(srcdir)/'`sensors/BMP280.cpp
+
+sensors/libpicopter_a-BMP280.obj: sensors/BMP280.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-BMP280.obj -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-BMP280.Tpo -c -o sensors/libpicopter_a-BMP280.obj `if test -f 'sensors/BMP280.cpp'; then $(CYGPATH_W) 'sensors/BMP280.cpp'; else $(CYGPATH_W) '$(srcdir)/sensors/BMP280.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) sensors/$(DEPDIR)/libpicopter_a-BMP280.Tpo sensors/$(DEPDIR)/libpicopter_a-BMP280.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sensors/BMP280.cpp' object='sensors/libpicopter_a-BMP280.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sensors/libpicopter_a-BMP280.obj `if test -f 'sensors/BMP280.cpp'; then $(CYGPATH_W) 'sensors/BMP280.cpp'; else $(CYGPATH_W) '$(srcdir)/sensors/BMP280.cpp'; fi`
+
+sensors/libpicopter_a-HMC5883L.o: sensors/HMC5883L.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-HMC5883L.o -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Tpo -c -o sensors/libpicopter_a-HMC5883L.o `test -f 'sensors/HMC5883L.cpp' || echo '$(srcdir)/'`sensors/HMC5883L.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Tpo sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sensors/HMC5883L.cpp' object='sensors/libpicopter_a-HMC5883L.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sensors/libpicopter_a-HMC5883L.o `test -f 'sensors/HMC5883L.cpp' || echo '$(srcdir)/'`sensors/HMC5883L.cpp
+
+sensors/libpicopter_a-HMC5883L.obj: sensors/HMC5883L.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-HMC5883L.obj -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Tpo -c -o sensors/libpicopter_a-HMC5883L.obj `if test -f 'sensors/HMC5883L.cpp'; then $(CYGPATH_W) 'sensors/HMC5883L.cpp'; else $(CYGPATH_W) '$(srcdir)/sensors/HMC5883L.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Tpo sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sensors/HMC5883L.cpp' object='sensors/libpicopter_a-HMC5883L.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sensors/libpicopter_a-HMC5883L.obj `if test -f 'sensors/HMC5883L.cpp'; then $(CYGPATH_W) 'sensors/HMC5883L.cpp'; else $(CYGPATH_W) '$(srcdir)/sensors/HMC5883L.cpp'; fi`
+
+sensors/libpicopter_a-ITG3200.o: sensors/ITG3200.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-ITG3200.o -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-ITG3200.Tpo -c -o sensors/libpicopter_a-ITG3200.o `test -f 'sensors/ITG3200.cpp' || echo '$(srcdir)/'`sensors/ITG3200.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) sensors/$(DEPDIR)/libpicopter_a-ITG3200.Tpo sensors/$(DEPDIR)/libpicopter_a-ITG3200.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sensors/ITG3200.cpp' object='sensors/libpicopter_a-ITG3200.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sensors/libpicopter_a-ITG3200.o `test -f 'sensors/ITG3200.cpp' || echo '$(srcdir)/'`sensors/ITG3200.cpp
+
+sensors/libpicopter_a-ITG3200.obj: sensors/ITG3200.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-ITG3200.obj -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-ITG3200.Tpo -c -o sensors/libpicopter_a-ITG3200.obj `if test -f 'sensors/ITG3200.cpp'; then $(CYGPATH_W) 'sensors/ITG3200.cpp'; else $(CYGPATH_W) '$(srcdir)/sensors/ITG3200.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) sensors/$(DEPDIR)/libpicopter_a-ITG3200.Tpo sensors/$(DEPDIR)/libpicopter_a-ITG3200.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='sensors/ITG3200.cpp' object='sensors/libpicopter_a-ITG3200.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o sensors/libpicopter_a-ITG3200.obj `if test -f 'sensors/ITG3200.cpp'; then $(CYGPATH_W) 'sensors/ITG3200.cpp'; else $(CYGPATH_W) '$(srcdir)/sensors/ITG3200.cpp'; fi`
 
 sensors/libpicopter_a-SensorUtils.o: sensors/SensorUtils.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-SensorUtils.o -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-SensorUtils.Tpo -c -o sensors/libpicopter_a-SensorUtils.o `test -f 'sensors/SensorUtils.cpp' || echo '$(srcdir)/'`sensors/SensorUtils.cpp
@@ -624,6 +687,9 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po
+	-rm -f sensors/$(DEPDIR)/libpicopter_a-BMP280.Po
+	-rm -f sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Po
+	-rm -f sensors/$(DEPDIR)/libpicopter_a-ITG3200.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-SensorUtils.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -676,6 +742,9 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po
+	-rm -f sensors/$(DEPDIR)/libpicopter_a-BMP280.Po
+	-rm -f sensors/$(DEPDIR)/libpicopter_a-HMC5883L.Po
+	-rm -f sensors/$(DEPDIR)/libpicopter_a-ITG3200.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-SensorUtils.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
