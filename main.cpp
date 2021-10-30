@@ -16,8 +16,9 @@ using namespace Eigen;
 #include "src/Timer.h"
 
 // #include "src/sensors/ADXL345.h"
-#include "src/sensors/ITG3200.h"
+// #include "src/sensors/ITG3200.h"
 // #include "src/sensors/BMP280.h"
+#include "src/sensors/HMC5883.h"
 
 // #define SEA_LEVEL_PRESSURE    1015.0f   // sea level pressure
 
@@ -63,14 +64,16 @@ int main()
     }
 
     // ADXL345 acc;
-    ITG3200 gyro;
+    // ITG3200 gyro;
     // BMP280 bar;
+    HMC5883 mag;
     // acc.init();
-    gyro.init();
+    // gyro.init();
     // bar.init();
+    mag.init();
 
     for(int i=0 ;; i++) {
-        Vector3f w = gyro.readXYZ();
+        Vector3f w = mag.readXYZ();
         std::cout << w.x() << "\t" << w.y() << "\t" << w.z() << std::endl;
         time_sleep(1./10);
     }

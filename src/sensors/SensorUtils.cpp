@@ -8,3 +8,7 @@ void writeTo(int handle, uint8_t address, uint8_t val) {
 
     i2cWriteDevice(handle, reinterpret_cast<char *>(command), 2);
 }
+
+uint8_t readFrom(int handle, uint8_t address) {
+    return i2cReadByteData(handle, address);
+}
