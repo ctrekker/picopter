@@ -5,6 +5,9 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						CraftProperties.h \
 						DroneState.cpp \
 						DroneState.h \
+						EigenTypes.h \
+						EventLoop.cpp \
+						EventLoop.h \
 						PIDController.cpp \
 						PIDController.h \
 						Simulation.cpp \
