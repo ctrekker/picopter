@@ -11,5 +11,5 @@ class Timer {
         Timer();
 
         void start();
-        float stop();
+        long long stop();
 };

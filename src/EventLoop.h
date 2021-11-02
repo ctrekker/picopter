@@ -7,20 +7,23 @@ typedef void (*event_callback)();
 class Event {
     private:
         event_callback callback;
-        int currentTick;
+        int period;
+        int currentTick = 0;
     public:
         Event(event_callback callback, int period);
 
-        void tick();
+        bool tick();
 };
 
 class EventLoop {
     private:
         int loopTime; // measured in microseconds
         std::vector<Event> events;
+        int64_t cycles;
+        int64_t maxCycles;
     public:
-        EventLoop();
+        EventLoop(int loopTime, int64_t maxCycles=-1);
 
-        int register_event(Event e);
-        void unregister_event(int id);
+        void registerEvent(Event e);
+        void run();
 };
