@@ -17,8 +17,8 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						Timer.cpp \
 						Timer.h \
 						VariadicTable.h \
-						math/Integrator.cpp \
-						math/Integrator.h \
+						math/Integrators.cpp \
+						math/Integrators.h \
 						sensors/ADXL345.cpp \
 						sensors/ADXL345.h \
 						sensors/BMP280.cpp \

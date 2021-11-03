@@ -1,8 +1,9 @@
-#include <src/drone.h>
+// #include <src/drone.h>
+#include "src/math/Integrators.h"
 
 int main() {
-    init();
-    runEventLoop();
+    // init();
+    // runEventLoop();
 
     return 0;
 }
