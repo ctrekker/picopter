@@ -3,6 +3,8 @@ noinst_LIBRARIES = libpicopter.a
 libpicopter_a_SOURCES = BTLEServer.cpp \
 						BTLEServer.h \
 						CraftProperties.h \
+						drone.cpp \
+						drone.h \
 						DroneState.cpp \
 						DroneState.h \
 						EigenTypes.h \
