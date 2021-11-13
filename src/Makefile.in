@@ -106,11 +106,14 @@ libpicopter_a_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
 am_libpicopter_a_OBJECTS = libpicopter_a-BTLEServer.$(OBJEXT) \
 	libpicopter_a-drone.$(OBJEXT) \
+	libpicopter_a-dronecontrol.$(OBJEXT) \
 	libpicopter_a-DroneState.$(OBJEXT) \
 	libpicopter_a-EventLoop.$(OBJEXT) \
-	libpicopter_a-PIDController.$(OBJEXT) \
 	libpicopter_a-Simulation.$(OBJEXT) \
 	libpicopter_a-Timer.$(OBJEXT) \
+	math/libpicopter_a-Integrator.$(OBJEXT) \
+	math/libpicopter_a-PIDController.$(OBJEXT) \
+	math/libpicopter_a-utils.$(OBJEXT) \
 	sensors/libpicopter_a-ADXL345.$(OBJEXT) \
 	sensors/libpicopter_a-BMP280.$(OBJEXT) \
 	sensors/libpicopter_a-HMC5883.$(OBJEXT) \
@@ -135,10 +138,13 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-BTLEServer.Po \
 	./$(DEPDIR)/libpicopter_a-DroneState.Po \
 	./$(DEPDIR)/libpicopter_a-EventLoop.Po \
-	./$(DEPDIR)/libpicopter_a-PIDController.Po \
 	./$(DEPDIR)/libpicopter_a-Simulation.Po \
 	./$(DEPDIR)/libpicopter_a-Timer.Po \
 	./$(DEPDIR)/libpicopter_a-drone.Po \
+	./$(DEPDIR)/libpicopter_a-dronecontrol.Po \
+	math/$(DEPDIR)/libpicopter_a-Integrator.Po \
+	math/$(DEPDIR)/libpicopter_a-PIDController.Po \
+	math/$(DEPDIR)/libpicopter_a-utils.Po \
 	sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po \
 	sensors/$(DEPDIR)/libpicopter_a-BMP280.Po \
 	sensors/$(DEPDIR)/libpicopter_a-HMC5883.Po \
@@ -302,18 +308,24 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						CraftProperties.h \
 						drone.cpp \
 						drone.h \
+						dronecontrol.cpp \
+						dronecontrol.h \
 						DroneState.cpp \
 						DroneState.h \
 						EigenTypes.h \
 						EventLoop.cpp \
 						EventLoop.h \
-						PIDController.cpp \
-						PIDController.h \
 						Simulation.cpp \
 						Simulation.h \
 						Timer.cpp \
 						Timer.h \
 						VariadicTable.h \
+						math/Integrator.cpp \
+						math/Integrator.h \
+						math/PIDController.cpp \
+						math/PIDController.h \
+						math/utils.cpp \
+						math/utils.h \
 						sensors/ADXL345.cpp \
 						sensors/ADXL345.h \
 						sensors/BMP280.cpp \
@@ -362,6 +374,18 @@ $(am__aclocal_m4_deps):
 
 clean-noinstLIBRARIES:
 	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+math/$(am__dirstamp):
+	@$(MKDIR_P) math
+	@: > math/$(am__dirstamp)
+math/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) math/$(DEPDIR)
+	@: > math/$(DEPDIR)/$(am__dirstamp)
+math/libpicopter_a-Integrator.$(OBJEXT): math/$(am__dirstamp) \
+	math/$(DEPDIR)/$(am__dirstamp)
+math/libpicopter_a-PIDController.$(OBJEXT): math/$(am__dirstamp) \
+	math/$(DEPDIR)/$(am__dirstamp)
+math/libpicopter_a-utils.$(OBJEXT): math/$(am__dirstamp) \
+	math/$(DEPDIR)/$(am__dirstamp)
 sensors/$(am__dirstamp):
 	@$(MKDIR_P) sensors
 	@: > sensors/$(am__dirstamp)
@@ -386,6 +410,7 @@ libpicopter.a: $(libpicopter_a_OBJECTS) $(libpicopter_a_DEPENDENCIES) $(EXTRA_li
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f math/*.$(OBJEXT)
 	-rm -f sensors/*.$(OBJEXT)
 
 distclean-compile:
@@ -394,10 +419,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-BTLEServer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-DroneState.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-EventLoop.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-PIDController.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Simulation.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Timer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-drone.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-dronecontrol.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@math/$(DEPDIR)/libpicopter_a-Integrator.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@math/$(DEPDIR)/libpicopter_a-PIDController.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@math/$(DEPDIR)/libpicopter_a-utils.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-BMP280.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@sensors/$(DEPDIR)/libpicopter_a-HMC5883.Po@am__quote@ # am--include-marker
@@ -454,6 +482,20 @@ libpicopter_a-drone.obj: drone.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-drone.obj `if test -f 'drone.cpp'; then $(CYGPATH_W) 'drone.cpp'; else $(CYGPATH_W) '$(srcdir)/drone.cpp'; fi`
 
+libpicopter_a-dronecontrol.o: dronecontrol.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-dronecontrol.o -MD -MP -MF $(DEPDIR)/libpicopter_a-dronecontrol.Tpo -c -o libpicopter_a-dronecontrol.o `test -f 'dronecontrol.cpp' || echo '$(srcdir)/'`dronecontrol.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-dronecontrol.Tpo $(DEPDIR)/libpicopter_a-dronecontrol.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='dronecontrol.cpp' object='libpicopter_a-dronecontrol.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-dronecontrol.o `test -f 'dronecontrol.cpp' || echo '$(srcdir)/'`dronecontrol.cpp
+
+libpicopter_a-dronecontrol.obj: dronecontrol.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-dronecontrol.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-dronecontrol.Tpo -c -o libpicopter_a-dronecontrol.obj `if test -f 'dronecontrol.cpp'; then $(CYGPATH_W) 'dronecontrol.cpp'; else $(CYGPATH_W) '$(srcdir)/dronecontrol.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-dronecontrol.Tpo $(DEPDIR)/libpicopter_a-dronecontrol.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='dronecontrol.cpp' object='libpicopter_a-dronecontrol.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-dronecontrol.obj `if test -f 'dronecontrol.cpp'; then $(CYGPATH_W) 'dronecontrol.cpp'; else $(CYGPATH_W) '$(srcdir)/dronecontrol.cpp'; fi`
+
 libpicopter_a-DroneState.o: DroneState.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-DroneState.o -MD -MP -MF $(DEPDIR)/libpicopter_a-DroneState.Tpo -c -o libpicopter_a-DroneState.o `test -f 'DroneState.cpp' || echo '$(srcdir)/'`DroneState.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-DroneState.Tpo $(DEPDIR)/libpicopter_a-DroneState.Po
@@ -482,20 +524,6 @@ libpicopter_a-EventLoop.obj: EventLoop.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-EventLoop.obj `if test -f 'EventLoop.cpp'; then $(CYGPATH_W) 'EventLoop.cpp'; else $(CYGPATH_W) '$(srcdir)/EventLoop.cpp'; fi`
 
-libpicopter_a-PIDController.o: PIDController.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-PIDController.o -MD -MP -MF $(DEPDIR)/libpicopter_a-PIDController.Tpo -c -o libpicopter_a-PIDController.o `test -f 'PIDController.cpp' || echo '$(srcdir)/'`PIDController.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-PIDController.Tpo $(DEPDIR)/libpicopter_a-PIDController.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='PIDController.cpp' object='libpicopter_a-PIDController.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-PIDController.o `test -f 'PIDController.cpp' || echo '$(srcdir)/'`PIDController.cpp
-
-libpicopter_a-PIDController.obj: PIDController.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-PIDController.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-PIDController.Tpo -c -o libpicopter_a-PIDController.obj `if test -f 'PIDController.cpp'; then $(CYGPATH_W) 'PIDController.cpp'; else $(CYGPATH_W) '$(srcdir)/PIDController.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-PIDController.Tpo $(DEPDIR)/libpicopter_a-PIDController.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='PIDController.cpp' object='libpicopter_a-PIDController.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-PIDController.obj `if test -f 'PIDController.cpp'; then $(CYGPATH_W) 'PIDController.cpp'; else $(CYGPATH_W) '$(srcdir)/PIDController.cpp'; fi`
-
 libpicopter_a-Simulation.o: Simulation.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Simulation.o -MD -MP -MF $(DEPDIR)/libpicopter_a-Simulation.Tpo -c -o libpicopter_a-Simulation.o `test -f 'Simulation.cpp' || echo '$(srcdir)/'`Simulation.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Simulation.Tpo $(DEPDIR)/libpicopter_a-Simulation.Po
@@ -523,6 +551,48 @@ libpicopter_a-Timer.obj: Timer.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Timer.cpp' object='libpicopter_a-Timer.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Timer.obj `if test -f 'Timer.cpp'; then $(CYGPATH_W) 'Timer.cpp'; else $(CYGPATH_W) '$(srcdir)/Timer.cpp'; fi`
+
+math/libpicopter_a-Integrator.o: math/Integrator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT math/libpicopter_a-Integrator.o -MD -MP -MF math/$(DEPDIR)/libpicopter_a-Integrator.Tpo -c -o math/libpicopter_a-Integrator.o `test -f 'math/Integrator.cpp' || echo '$(srcdir)/'`math/Integrator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) math/$(DEPDIR)/libpicopter_a-Integrator.Tpo math/$(DEPDIR)/libpicopter_a-Integrator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='math/Integrator.cpp' object='math/libpicopter_a-Integrator.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o math/libpicopter_a-Integrator.o `test -f 'math/Integrator.cpp' || echo '$(srcdir)/'`math/Integrator.cpp
+
+math/libpicopter_a-Integrator.obj: math/Integrator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT math/libpicopter_a-Integrator.obj -MD -MP -MF math/$(DEPDIR)/libpicopter_a-Integrator.Tpo -c -o math/libpicopter_a-Integrator.obj `if test -f 'math/Integrator.cpp'; then $(CYGPATH_W) 'math/Integrator.cpp'; else $(CYGPATH_W) '$(srcdir)/math/Integrator.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) math/$(DEPDIR)/libpicopter_a-Integrator.Tpo math/$(DEPDIR)/libpicopter_a-Integrator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='math/Integrator.cpp' object='math/libpicopter_a-Integrator.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o math/libpicopter_a-Integrator.obj `if test -f 'math/Integrator.cpp'; then $(CYGPATH_W) 'math/Integrator.cpp'; else $(CYGPATH_W) '$(srcdir)/math/Integrator.cpp'; fi`
+
+math/libpicopter_a-PIDController.o: math/PIDController.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT math/libpicopter_a-PIDController.o -MD -MP -MF math/$(DEPDIR)/libpicopter_a-PIDController.Tpo -c -o math/libpicopter_a-PIDController.o `test -f 'math/PIDController.cpp' || echo '$(srcdir)/'`math/PIDController.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) math/$(DEPDIR)/libpicopter_a-PIDController.Tpo math/$(DEPDIR)/libpicopter_a-PIDController.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='math/PIDController.cpp' object='math/libpicopter_a-PIDController.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o math/libpicopter_a-PIDController.o `test -f 'math/PIDController.cpp' || echo '$(srcdir)/'`math/PIDController.cpp
+
+math/libpicopter_a-PIDController.obj: math/PIDController.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT math/libpicopter_a-PIDController.obj -MD -MP -MF math/$(DEPDIR)/libpicopter_a-PIDController.Tpo -c -o math/libpicopter_a-PIDController.obj `if test -f 'math/PIDController.cpp'; then $(CYGPATH_W) 'math/PIDController.cpp'; else $(CYGPATH_W) '$(srcdir)/math/PIDController.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) math/$(DEPDIR)/libpicopter_a-PIDController.Tpo math/$(DEPDIR)/libpicopter_a-PIDController.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='math/PIDController.cpp' object='math/libpicopter_a-PIDController.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o math/libpicopter_a-PIDController.obj `if test -f 'math/PIDController.cpp'; then $(CYGPATH_W) 'math/PIDController.cpp'; else $(CYGPATH_W) '$(srcdir)/math/PIDController.cpp'; fi`
+
+math/libpicopter_a-utils.o: math/utils.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT math/libpicopter_a-utils.o -MD -MP -MF math/$(DEPDIR)/libpicopter_a-utils.Tpo -c -o math/libpicopter_a-utils.o `test -f 'math/utils.cpp' || echo '$(srcdir)/'`math/utils.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) math/$(DEPDIR)/libpicopter_a-utils.Tpo math/$(DEPDIR)/libpicopter_a-utils.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='math/utils.cpp' object='math/libpicopter_a-utils.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o math/libpicopter_a-utils.o `test -f 'math/utils.cpp' || echo '$(srcdir)/'`math/utils.cpp
+
+math/libpicopter_a-utils.obj: math/utils.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT math/libpicopter_a-utils.obj -MD -MP -MF math/$(DEPDIR)/libpicopter_a-utils.Tpo -c -o math/libpicopter_a-utils.obj `if test -f 'math/utils.cpp'; then $(CYGPATH_W) 'math/utils.cpp'; else $(CYGPATH_W) '$(srcdir)/math/utils.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) math/$(DEPDIR)/libpicopter_a-utils.Tpo math/$(DEPDIR)/libpicopter_a-utils.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='math/utils.cpp' object='math/libpicopter_a-utils.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o math/libpicopter_a-utils.obj `if test -f 'math/utils.cpp'; then $(CYGPATH_W) 'math/utils.cpp'; else $(CYGPATH_W) '$(srcdir)/math/utils.cpp'; fi`
 
 sensors/libpicopter_a-ADXL345.o: sensors/ADXL345.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT sensors/libpicopter_a-ADXL345.o -MD -MP -MF sensors/$(DEPDIR)/libpicopter_a-ADXL345.Tpo -c -o sensors/libpicopter_a-ADXL345.o `test -f 'sensors/ADXL345.cpp' || echo '$(srcdir)/'`sensors/ADXL345.cpp
@@ -709,6 +779,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f math/$(DEPDIR)/$(am__dirstamp)
+	-rm -f math/$(am__dirstamp)
 	-rm -f sensors/$(DEPDIR)/$(am__dirstamp)
 	-rm -f sensors/$(am__dirstamp)
 
@@ -723,10 +795,13 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-EventLoop.Po
-	-rm -f ./$(DEPDIR)/libpicopter_a-PIDController.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-drone.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-dronecontrol.Po
+	-rm -f math/$(DEPDIR)/libpicopter_a-Integrator.Po
+	-rm -f math/$(DEPDIR)/libpicopter_a-PIDController.Po
+	-rm -f math/$(DEPDIR)/libpicopter_a-utils.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-BMP280.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-HMC5883.Po
@@ -780,10 +855,13 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-EventLoop.Po
-	-rm -f ./$(DEPDIR)/libpicopter_a-PIDController.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-drone.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-dronecontrol.Po
+	-rm -f math/$(DEPDIR)/libpicopter_a-Integrator.Po
+	-rm -f math/$(DEPDIR)/libpicopter_a-PIDController.Po
+	-rm -f math/$(DEPDIR)/libpicopter_a-utils.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-ADXL345.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-BMP280.Po
 	-rm -f sensors/$(DEPDIR)/libpicopter_a-HMC5883.Po

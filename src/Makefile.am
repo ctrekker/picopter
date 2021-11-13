@@ -5,13 +5,13 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						CraftProperties.h \
 						drone.cpp \
 						drone.h \
+						dronecontrol.cpp \
+						dronecontrol.h \
 						DroneState.cpp \
 						DroneState.h \
 						EigenTypes.h \
 						EventLoop.cpp \
 						EventLoop.h \
-						PIDController.cpp \
-						PIDController.h \
 						Simulation.cpp \
 						Simulation.h \
 						Timer.cpp \
@@ -19,6 +19,10 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						VariadicTable.h \
 						math/Integrator.cpp \
 						math/Integrator.h \
+						math/PIDController.cpp \
+						math/PIDController.h \
+						math/utils.cpp \
+						math/utils.h \
 						sensors/ADXL345.cpp \
 						sensors/ADXL345.h \
 						sensors/BMP280.cpp \

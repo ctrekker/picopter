@@ -8,26 +8,36 @@
 
 #include "EventLoop.h"
 #include "DroneState.h"
+#include "Simulation.h"
 #include "EigenTypes.h"
+#include "dronecontrol.h"
 #include "sensors/ADXL345.h"
 #include "sensors/ITG3200.h"
-
-#define G_ACC 9.80665
+#include "math/PIDController.h"
+#include "math/utils.h"
 
 
 ADXL345 acc;
 ITG3200 gyro;
 
 DroneState3d state;
+std::vector<DroneState3d> stateHistory;
+std::vector<Vector3f> accelerationHistory;
+
+const float DEG_TO_RAD = M_PI / 180.;
 
 /* calibration variables */
 const Vector3f expectedAcceleration(0., 0., G_ACC);
+Vector3f accelerationBias(0., 0., 0.);
 float accelerationGain = 1.;
 Quaternionf accelerationRotation(0., 0., 0., 0.);
-
 Vector3f angularVelocityBias(0., 0., 0.);
+
 std::vector<Vector3f> calibrationAccelerations;
 std::vector<Vector3f> calibrationAngVelocities;
+
+/* control things */
+ThrustController thrustController(0.3, 0.2, 0, 10, 0, 5, 0.01);
 
 int init() {
     if(gpioInitialise() < 0) {
@@ -42,37 +52,24 @@ int init() {
 }
 
 
-Vector3f _sum(std::vector<Vector3f> vecs) {
-    Vector3f agg(0., 0., 0.);
-
-    for(int i=0; i<vecs.size(); i++) {
-        agg += vecs[i];
-    }
-
-    return agg;
-}
-Vector3f _mean(std::vector<Vector3f> vecs) {
-    return _sum(vecs) / vecs.size();
-}
-float _angleBetween(Vector3f vec1, Vector3f vec2) {
-    float dotProduct = vec1.transpose() * vec2;
-    float normProduct = vec1.norm() * vec2.norm();
-    float in = dotProduct / normProduct;
-    return acos(in);
-}
-
-
 void calibrateSensors() {
     Vector3f avgAcc = _mean(calibrationAccelerations);
     Vector3f avgAngVel = _mean(calibrationAngVelocities);
 
-    accelerationGain = G_ACC * 1. / avgAcc.norm();
+    accelerationBias = -avgAcc;
+    accelerationBias += G_VEC;
+
+    // acceleration calibration
+    accelerationGain = G_ACC * 1. / (avgAcc + accelerationBias).norm();
 
     Vector3f normAcc = avgAcc * accelerationGain;
     Vector3f rotAxis = normAcc.cross(expectedAcceleration);
     rotAxis /= rotAxis.norm();
 
     accelerationRotation = angleAxisQuaternion<float>(_angleBetween(normAcc, expectedAcceleration), rotAxis);
+
+    // angular velocities calibration
+    angularVelocityBias = -avgAngVel;
 }
 
 
@@ -87,7 +84,38 @@ void readOrientationSensors() {
     Vector3f a = acc.readXYZ();
     Vector3f w = gyro.readXYZ();
 
+    a += accelerationBias;
     a *= accelerationGain;
+    // a = (accelerationRotation * realImaginaryQuaternion<float>(0., a) * accelerationRotation.inverse()).vec();
+
+    Vector3f smoothedAcc(a);
+    int r = 10;
+    int actualR = 0;
+    for(int i=0; i<r; i++) {
+        int idx = accelerationHistory.size()-1-i;
+        if(idx >= 0) {
+            smoothedAcc += accelerationHistory[idx];
+            actualR++;
+        }
+    }
+    smoothedAcc /= (actualR + 1);
+
+    std::cout << smoothedAcc.x() << ", " << smoothedAcc.y() << ", " << smoothedAcc.z() << std::endl;
+
+    accelerationHistory.push_back(a);
+
+
+    w += angularVelocityBias;
+    w *= DEG_TO_RAD;
+
+    state = stateTransition(state, smoothedAcc, w, 0.01);
+    stateHistory.push_back(state);
+
+
+    // PID CONTROL LOOPS
+    Vector4f thrusts = thrustController.step(state);
+    std::cout << thrusts(0) << ", " << thrusts(1) << ", " << thrusts(2) << ", " << thrusts(3) << std::endl;
+
 }
 
 
@@ -99,4 +127,12 @@ void runEventLoop() {
 
     calibrateSensors();
     std::cout << "Calibration complete" << std::endl;
+
+
+    stateHistory.push_back(state);
+
+    EventLoop controlLoop(1000 * 10, 100 * 3);
+    controlLoop.registerEvent(Event(readOrientationSensors, 1));
+    controlLoop.run();
+    std::cout << stateHistory << std::endl;
 }
