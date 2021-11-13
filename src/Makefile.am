@@ -17,8 +17,8 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						Timer.cpp \
 						Timer.h \
 						VariadicTable.h \
-						math/Integrator.cpp \
-						math/Integrator.h \
+						math/Integrators.cpp \
+						math/Integrators.h \
 						math/PIDController.cpp \
 						math/PIDController.h \
 						math/utils.cpp \
