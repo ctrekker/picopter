@@ -17,6 +17,8 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						Timer.cpp \
 						Timer.h \
 						VariadicTable.h \
+						ble/bleserver.cpp \
+						ble/bleserver.h \
 						math/Integrators.cpp \
 						math/Integrators.h \
 						math/PIDController.cpp \
@@ -33,4 +35,4 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						sensors/ITG3200.h \
 						sensors/SensorUtils.cpp \
 						sensors/SensorUtils.h
-libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen
+libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen -I$(srcdir)/../ggk/include
