@@ -100,6 +100,8 @@
 #include <Gobbledegook.h>
 #include <glib.h>
 
+#include "drone.h"
+
 //
 // Constants
 //
@@ -220,7 +222,7 @@ int dataSetter(const char *pName, const void *pData)
 	}
     else if(strName == "controls/throttle") {
         throttle = *static_cast<const guint16 *>(pData);
-        LogStatus((std::string("Throttle set to: ") + std::to_string(throttle)).c_str());
+		setMotorThrottle(throttle);
         return 1;
     }
 

@@ -109,6 +109,7 @@ am_libpicopter_a_OBJECTS = libpicopter_a-BTLEServer.$(OBJEXT) \
 	libpicopter_a-dronecontrol.$(OBJEXT) \
 	libpicopter_a-DroneState.$(OBJEXT) \
 	libpicopter_a-EventLoop.$(OBJEXT) \
+	libpicopter_a-Motors.$(OBJEXT) \
 	libpicopter_a-Simulation.$(OBJEXT) \
 	libpicopter_a-Timer.$(OBJEXT) \
 	ble/libpicopter_a-bleserver.$(OBJEXT) \
@@ -139,6 +140,7 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-BTLEServer.Po \
 	./$(DEPDIR)/libpicopter_a-DroneState.Po \
 	./$(DEPDIR)/libpicopter_a-EventLoop.Po \
+	./$(DEPDIR)/libpicopter_a-Motors.Po \
 	./$(DEPDIR)/libpicopter_a-Simulation.Po \
 	./$(DEPDIR)/libpicopter_a-Timer.Po \
 	./$(DEPDIR)/libpicopter_a-drone.Po \
@@ -320,6 +322,8 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						EigenTypes.h \
 						EventLoop.cpp \
 						EventLoop.h \
+						Motors.cpp \
+						Motors.h \
 						Simulation.cpp \
 						Simulation.h \
 						Timer.cpp \
@@ -435,6 +439,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-BTLEServer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-DroneState.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-EventLoop.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Motors.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Simulation.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Timer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-drone.Po@am__quote@ # am--include-marker
@@ -540,6 +545,20 @@ libpicopter_a-EventLoop.obj: EventLoop.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='EventLoop.cpp' object='libpicopter_a-EventLoop.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-EventLoop.obj `if test -f 'EventLoop.cpp'; then $(CYGPATH_W) 'EventLoop.cpp'; else $(CYGPATH_W) '$(srcdir)/EventLoop.cpp'; fi`
+
+libpicopter_a-Motors.o: Motors.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Motors.o -MD -MP -MF $(DEPDIR)/libpicopter_a-Motors.Tpo -c -o libpicopter_a-Motors.o `test -f 'Motors.cpp' || echo '$(srcdir)/'`Motors.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Motors.Tpo $(DEPDIR)/libpicopter_a-Motors.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Motors.cpp' object='libpicopter_a-Motors.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Motors.o `test -f 'Motors.cpp' || echo '$(srcdir)/'`Motors.cpp
+
+libpicopter_a-Motors.obj: Motors.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Motors.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-Motors.Tpo -c -o libpicopter_a-Motors.obj `if test -f 'Motors.cpp'; then $(CYGPATH_W) 'Motors.cpp'; else $(CYGPATH_W) '$(srcdir)/Motors.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-Motors.Tpo $(DEPDIR)/libpicopter_a-Motors.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Motors.cpp' object='libpicopter_a-Motors.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-Motors.obj `if test -f 'Motors.cpp'; then $(CYGPATH_W) 'Motors.cpp'; else $(CYGPATH_W) '$(srcdir)/Motors.cpp'; fi`
 
 libpicopter_a-Simulation.o: Simulation.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-Simulation.o -MD -MP -MF $(DEPDIR)/libpicopter_a-Simulation.Tpo -c -o libpicopter_a-Simulation.o `test -f 'Simulation.cpp' || echo '$(srcdir)/'`Simulation.cpp
@@ -828,6 +847,7 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-EventLoop.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-Motors.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-drone.Po
@@ -889,6 +909,7 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-EventLoop.Po
+	-rm -f ./$(DEPDIR)/libpicopter_a-Motors.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Timer.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-drone.Po

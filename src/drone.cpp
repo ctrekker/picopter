@@ -10,6 +10,7 @@
 #include "DroneState.h"
 #include "Simulation.h"
 #include "EigenTypes.h"
+#include "Motors.h"
 #include "dronecontrol.h"
 #include "sensors/ADXL345.h"
 #include "sensors/ITG3200.h"
@@ -37,6 +38,8 @@ std::vector<Vector3f> calibrationAccelerations;
 std::vector<Vector3f> calibrationAngVelocities;
 
 /* control things */
+int motorPins[MOTOR_COUNT] = {6, 13, 19, 26};
+Motors motors(motorPins);
 ThrustController thrustController(0.3, 0.2, 0, 10, 0, 5, 0.01);
 
 int init() {
@@ -50,6 +53,16 @@ int init() {
 
     return 0;
 }
+
+
+void calibrateMotors() {
+    motors.calibrate();
+}
+
+void setMotorThrottle(int throttle) {
+    motors.setThrottle(throttle);
+}
+
 
 
 void calibrateSensors() {

@@ -12,6 +12,8 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						EigenTypes.h \
 						EventLoop.cpp \
 						EventLoop.h \
+						Motors.cpp \
+						Motors.h \
 						Simulation.cpp \
 						Simulation.h \
 						Timer.cpp \
