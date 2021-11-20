@@ -98,6 +98,7 @@
 #include <sstream>
 
 #include <Gobbledegook.h>
+#include <glib.h>
 
 //
 // Constants
@@ -110,11 +111,9 @@ static const int kMaxAsyncInitTimeoutMS = 30 * 1000;
 // Server data values
 //
 
-// The battery level ("battery/level") reported by the server (see Server.cpp)
-static uint8_t serverDataBatteryLevel = 78;
-
 // The text string ("text/string") used by our custom text string service (see Server.cpp)
 static std::string serverDataTextString = "Hello, world!";
+static guint16 throttle = 0;
 
 //
 // Logging
@@ -183,11 +182,7 @@ const void *dataGetter(const char *pName)
 
 	std::string strName = pName;
 
-	if (strName == "battery/level")
-	{
-		return &serverDataBatteryLevel;
-	}
-	else if (strName == "text/string")
+	if (strName == "text/string")
 	{
 		return serverDataTextString.c_str();
 	}
@@ -217,18 +212,17 @@ int dataSetter(const char *pName, const void *pData)
 
 	std::string strName = pName;
 
-	if (strName == "battery/level")
-	{
-		serverDataBatteryLevel = *static_cast<const uint8_t *>(pData);
-		LogDebug((std::string("Server data: battery level set to ") + std::to_string(serverDataBatteryLevel)).c_str());
-		return 1;
-	}
-	else if (strName == "text/string")
+	if (strName == "text/string")
 	{
 		serverDataTextString = static_cast<const char *>(pData);
 		LogDebug((std::string("Server data: text string set to '") + serverDataTextString + "'").c_str());
 		return 1;
 	}
+    else if(strName == "controls/throttle") {
+        throttle = *static_cast<const guint16 *>(pData);
+        LogStatus((std::string("Throttle set to: ") + std::to_string(throttle)).c_str());
+        return 1;
+    }
 
 	LogWarn((std::string("Unknown name for server data setter request: '") + pName + "'").c_str());
 
@@ -290,23 +284,6 @@ int blemain(int argc, char **ppArgv)
 	//     for more information.
 	//
 	if (!ggkStart("picopter", "PiCopter", "PiCopter", dataGetter, dataSetter, kMaxAsyncInitTimeoutMS))
-	{
-		return -1;
-	}
-
-	// Wait for the server to start the shutdown process
-	//
-	// While we wait, every 15 ticks, drop the battery level by one percent until we reach 0
-	while (ggkGetServerRunState() < EStopping)
-	{
-		std::this_thread::sleep_for(std::chrono::seconds(15));
-
-		serverDataBatteryLevel = std::max(serverDataBatteryLevel - 1, 0);
-		ggkNofifyUpdatedCharacteristic("/com/gobbledegook/battery/level");
-	}
-
-	// Wait for the server to come to a complete stop (CTRL-C from the command line)
-	if (!ggkWait())
 	{
 		return -1;
 	}

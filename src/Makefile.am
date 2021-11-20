@@ -35,4 +35,4 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						sensors/ITG3200.h \
 						sensors/SensorUtils.cpp \
 						sensors/SensorUtils.h
-libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen -I$(srcdir)/../ggk/include
+libpicopter_a_CPPFLAGS = -I$(srcdir)/../eigen -I$(srcdir)/../ggk/include $(GLIB_CFLAGS) $(GIO_CFLAGS) $(GOBJECT_CFLAGS)

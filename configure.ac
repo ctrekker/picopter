@@ -13,6 +13,24 @@ AC_SUBST(GLIB_CFLAGS)
 AC_SUBST(GIO_CFLAGS)
 AC_SUBST(GOBJECT_CFLAGS)
 
+if pkg-config --atleast-version=2.00 glib-2.0; then
+   GLIB_CFLAGS=`pkg-config --cflags glib-2.0`
+else
+   AC_MSG_ERROR(glib-2.0 not found)
+fi
+
+if pkg-config --atleast-version=2.00 gio-2.0; then
+   GIO_CFLAGS=`pkg-config --cflags gio-2.0`
+else
+   AC_MSG_ERROR(gio-2.0 not found)
+fi
+
+if pkg-config --atleast-version=2.00 gobject-2.0; then
+   GOBJECT_CFLAGS=`pkg-config --cflags gobject-2.0`
+else
+   AC_MSG_ERROR(gobject-2.0 not found)
+fi
+
 AC_CONFIG_SUBDIRS([
  src
  ggk
