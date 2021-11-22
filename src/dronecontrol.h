@@ -18,5 +18,5 @@ class ThrustController {
         ThrustController(float Kpp, float Kip, float Kdp, float Kpq, float Kiq, float Kdq, float dt);
         ~ThrustController();
 
-        Vector4f step(DroneState3d s);
+        Vector4f step(RealtimeDroneState s);
 };

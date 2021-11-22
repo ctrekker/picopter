@@ -21,8 +21,8 @@
 ADXL345 acc;
 ITG3200 gyro;
 
-DroneState3d state;
-std::vector<DroneState3d> stateHistory;
+RealtimeDroneState state;
+std::vector<RealtimeDroneState> stateHistory;
 std::vector<Vector3f> accelerationHistory;
 
 const float DEG_TO_RAD = M_PI / 180.;
@@ -31,7 +31,6 @@ const float DEG_TO_RAD = M_PI / 180.;
 const Vector3f expectedAcceleration(0., 0., G_ACC);
 Vector3f accelerationBias(0., 0., 0.);
 float accelerationGain = 1.;
-Quaternionf accelerationRotation(0., 0., 0., 0.);
 Vector3f angularVelocityBias(0., 0., 0.);
 
 std::vector<Vector3f> calibrationAccelerations;
@@ -70,16 +69,10 @@ void calibrateSensors() {
     Vector3f avgAngVel = _mean(calibrationAngVelocities);
 
     accelerationBias = -avgAcc;
-    accelerationBias += G_VEC;
+    accelerationBias += Vector3f(0., 0., 1.); // this is the expected value
 
     // acceleration calibration
     accelerationGain = G_ACC * 1. / (avgAcc + accelerationBias).norm();
-
-    Vector3f normAcc = avgAcc * accelerationGain;
-    Vector3f rotAxis = normAcc.cross(expectedAcceleration);
-    rotAxis /= rotAxis.norm();
-
-    accelerationRotation = angleAxisQuaternion<float>(_angleBetween(normAcc, expectedAcceleration), rotAxis);
 
     // angular velocities calibration
     angularVelocityBias = -avgAngVel;
@@ -99,7 +92,6 @@ void readOrientationSensors() {
 
     a += accelerationBias;
     a *= accelerationGain;
-    // a = (accelerationRotation * realImaginaryQuaternion<float>(0., a) * accelerationRotation.inverse()).vec();
 
     Vector3f smoothedAcc(a);
     int r = 10;
@@ -113,7 +105,6 @@ void readOrientationSensors() {
     }
     smoothedAcc /= (actualR + 1);
 
-    std::cout << smoothedAcc.x() << ", " << smoothedAcc.y() << ", " << smoothedAcc.z() << std::endl;
 
     accelerationHistory.push_back(a);
 
@@ -121,13 +112,15 @@ void readOrientationSensors() {
     w += angularVelocityBias;
     w *= DEG_TO_RAD;
 
-    state = stateTransition(state, smoothedAcc, w, 0.01);
+    state = realtimeTransition(state, a, w, 0.01);
     stateHistory.push_back(state);
+
+    std::cout << state.q.x() << "\t" << state.q.y() << std::endl;
 
 
     // PID CONTROL LOOPS
     Vector4f thrusts = thrustController.step(state);
-    std::cout << thrusts(0) << ", " << thrusts(1) << ", " << thrusts(2) << ", " << thrusts(3) << std::endl;
+    // std::cout << thrusts(0) << ", " << thrusts(1) << ", " << thrusts(2) << ", " << thrusts(3) << std::endl;
 
 }
 
@@ -144,7 +137,7 @@ void runEventLoop() {
 
     stateHistory.push_back(state);
 
-    EventLoop controlLoop(1000 * 10, 100 * 3);
+    EventLoop controlLoop(1000 * 10);
     controlLoop.registerEvent(Event(readOrientationSensors, 1));
     controlLoop.run();
     std::cout << stateHistory << std::endl;

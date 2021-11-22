@@ -49,6 +49,8 @@ void EventLoop::run() {
             break;
         }
 
-        usleep(delayTime);
+        if(delayTime > 0) {
+            usleep(delayTime);
+        }
     }
 }

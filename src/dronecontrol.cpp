@@ -8,6 +8,8 @@
 #include "math/PIDController.h"
 #include "math/utils.h"
 
+using namespace Eigen;
+
 ThrustController::ThrustController(float Kpp, float Kip, float Kdp, float Kpq, float Kiq, float Kdq, float dt) {
     this->Kpp = Kpp;
     this->Kip = Kip;
@@ -26,41 +28,44 @@ ThrustController::~ThrustController() {
     delete rotationalController;
 }
 
-Vector4f ThrustController::step(DroneState3d s) {
-    const float expected_z = 0.5;
-    const Vector3f z_axis(0., 0., 1.);
+Vector4f ThrustController::step(RealtimeDroneState s) {
+    // const float expected_z = 0.5;
+    // const Vector3f z_axis(0., 0., 1.);
 
 
-    // compute translational thrust
-    float error_z = expected_z - s.p.z();
-    float translationalThrust = translationalController->step(error_z);
+    // // compute translational thrust
+    // float error_z = expected_z - s.p.z();
+    // float translationalThrust = translationalController->step(error_z);
 
 
-    // compute rotational thrust
-    // NOTE: the projected axis math assumes the target is the XY-PLANE!!!
-    //       this will need to be changed for arbitrary rotation targets
+    // // compute rotational thrust
+    // // NOTE: the projected axis math assumes the target is the XY-PLANE!!!
+    // //       this will need to be changed for arbitrary rotation targets
 
-    // scalar error in q
-    Vector3f rotated_z = (s.q * realImaginaryQuaternion<float>(0., z_axis) * s.q.inverse()).vec();
-    float error_q = -_angleBetween(rotated_z, z_axis);
-    float rotationalThrust = rotationalController->step(error_q);
-    // directional error in q
-    Vector3f projectedAxis = rotated_z - _proj(rotated_z, z_axis);
-    projectedAxis /= projectedAxis.norm();
+    // // scalar error in q
+    // Vector3f rotated_z = (s.q * realImaginaryQuaternion<float>(0., z_axis) * s.q.inverse()).vec();
+    // float error_q = -_angleBetween(rotated_z, z_axis);
+    // float rotationalThrust = rotationalController->step(error_q);
+    // // directional error in q
+    // Vector3f projectedAxis = rotated_z - _proj(rotated_z, z_axis);
+    // projectedAxis /= projectedAxis.norm();
 
-    if(isnan(projectedAxis.x()) || isnan(projectedAxis.y()) || isnan(projectedAxis.z())) {
-        projectedAxis = Vector3f(0., 0., 0.);
-    }
+    // if(isnan(projectedAxis.x()) || isnan(projectedAxis.y()) || isnan(projectedAxis.z())) {
+    //     projectedAxis = Vector3f(0., 0., 0.);
+    // }
 
-    float wx = projectedAxis.x();
-    float wy = projectedAxis.y();
+    // float wx = projectedAxis.x();
+    // float wy = projectedAxis.y();
 
 
-    // combine PIDs additively with approprate weighting of rotational PID
+    // // combine PIDs additively with approprate weighting of rotational PID
+    // return Vector4f(
+    //     translationalThrust + wy * rotationalThrust,
+    //     translationalThrust + wx * rotationalThrust,
+    //     translationalThrust + wy * -rotationalThrust,
+    //     translationalThrust + wx * -rotationalThrust
+    // );
     return Vector4f(
-        translationalThrust + wy * rotationalThrust,
-        translationalThrust + wx * rotationalThrust,
-        translationalThrust + wy * -rotationalThrust,
-        translationalThrust + wx * -rotationalThrust
+        0, 0, 0, 0
     );
 }

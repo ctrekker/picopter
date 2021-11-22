@@ -1,32 +1,51 @@
 #include "Simulation.h"
 #include "CraftProperties.h"
 #include "EigenTypes.h"
+#include "math/utils.h"
 
 #include <Eigen/Geometry>
 #include <Eigen/Dense>
+#include <math.h>
+
+
+#include <iostream>
+
+
+using namespace Eigen;
+
+
+// weight given to gyroscope for orientation
+// inverse (1-mu) weight given to accelerometer for orientation
+#define mu 0.98
+
+
+float a = 1/sqrt(2);
+Matrix<float, 2, 2> Ainv {
+    { a, a},
+    {-a, a}
+};
+Matrix<float, 3, 3> Ainv3 {
+    { a, a, 0},
+    {-a, a, 0},
+    { 0, 0, 1}
+};
 
 
 // transform state from global sensor data
-DroneState3d stateTransition(DroneState3d s, Vector3f a, Vector3f w, float dt) {
-    // apply the current orientation quaternion backwards (to rotate from local to global instead of global to local)
-    Vector3f globalAcceleration = (s.q.inverse() * realImaginaryQuaternion<float>(0., a) * s.q).vec();
-    // Vector3f globalAcceleration(a);
-    // subtract expected value from it
-    globalAcceleration -= G_VEC;
-    // compute the new global position and velocity based on global acceleration
-    Vector3f p = s.p + s.v * dt + 0.5 * globalAcceleration * dt * dt;
-    Vector3f v = s.v + globalAcceleration * dt;
+RealtimeDroneState realtimeTransition(RealtimeDroneState s, Vector3f a, Vector3f w, float dt) {
+    // estimate orientation from acceleration vector
+    Vector3f an = a / a.norm() * G_VEC.norm();
+    an = Ainv3 * an;  // transform into our more convenient diagonal space
+    Vector2f a_xz(an.x(), an.z());
+    Vector2f a_yz(an.y(), an.z());
+    Vector2f qa(_sign(an.y()) * acos(a_xz.norm() / G_VEC.norm()), -_sign(an.x()) * acos(a_yz.norm() / G_VEC.norm()));
 
-    /*
-    new_ω = s.ω .* s.a + α .*  Δt
-	new_axis = norm(new_ω) != 0 ? new_ω ./ norm(new_ω) : [0., 0., 0.]
-    */
-    Vector3f new_w = w;
-    Vector3f new_axis = new_w.norm() != 0 ? new_w / new_w.norm() : Vector3f(0, 0, 0);
-    Quaternionf new_q = s.q * angleAxisQuaternion<float>(new_w.norm() * dt, new_axis); // s.q * q(s.ω * Δt, new_axis)
+    // transformed angular velocity
+    Vector2f wxy(w.x(), w.y());
+    Vector2f w45 = Ainv * wxy;
+    Vector2f dq(w45.x() * dt, w45.y() * dt);
 
-    // return DroneState3d(s.p, s.q, s.v, s.w, a);
-    return DroneState3d(p, new_q, v, new_w.norm(), new_axis);
+    return RealtimeDroneState(mu * (s.q + dq) + (1 - mu) * qa, Vector3f(w45.x(), w45.y(), w.z()));
 }
 
 std::vector<DroneState3d> simulate(CraftProperties properties, DroneState3d initialState, thrust_3d_fn P, float dt, float tFinal) {

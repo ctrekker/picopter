@@ -9,7 +9,7 @@ int main(int argc, char **ppArgv) {
     init();
     calibrateMotors();
     setMotorThrottle(0);
-    // runEventLoop();
+    runEventLoop();
 
     // do something to wait
     while (ggkGetServerRunState() < EStopping)
