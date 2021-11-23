@@ -37,9 +37,10 @@ std::vector<Vector3f> calibrationAccelerations;
 std::vector<Vector3f> calibrationAngVelocities;
 
 /* control things */
-int motorPins[MOTOR_COUNT] = {6, 13, 19, 26};
+int motorPins[MOTOR_COUNT] = {26, 6, 13, 19}; // ORDER MATTERS
 Motors motors(motorPins);
-ThrustController thrustController(0.3, 0.2, 0, 10, 0, 5, 0.01);
+ThrustController thrustController(9, 1, 2, 0.01);
+const float thrustGain = 25;
 
 int init() {
     if(gpioInitialise() < 0) {
@@ -59,7 +60,8 @@ void calibrateMotors() {
 }
 
 void setMotorThrottle(int throttle) {
-    motors.setThrottle(throttle);
+    motors.setThrottle(throttle);  // sets state variable
+    motors.writeSpeeds();  // actually writes pwm to escs
 }
 
 
@@ -115,13 +117,14 @@ void readOrientationSensors() {
     state = realtimeTransition(state, a, w, 0.01);
     stateHistory.push_back(state);
 
-    std::cout << state.q.x() << "\t" << state.q.y() << std::endl;
-
 
     // PID CONTROL LOOPS
-    Vector4f thrusts = thrustController.step(state);
-    // std::cout << thrusts(0) << ", " << thrusts(1) << ", " << thrusts(2) << ", " << thrusts(3) << std::endl;
+    Vector4f thrustAdjustments = thrustController.step(state);
+    thrustAdjustments *= thrustGain;
 
+//    std::cout << thrustAdjustments(0) << ", " << thrustAdjustments(1) << ", " << thrustAdjustments(2) << ", " << thrustAdjustments(3) << std::endl;
+//    motors.setAdjustments(thrustAdjustments);
+//    motors.writeSpeeds();
 }
 
 

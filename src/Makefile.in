@@ -104,8 +104,7 @@ am__v_AR_1 =
 libpicopter_a_AR = $(AR) $(ARFLAGS)
 libpicopter_a_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_libpicopter_a_OBJECTS = libpicopter_a-BTLEServer.$(OBJEXT) \
-	libpicopter_a-drone.$(OBJEXT) \
+am_libpicopter_a_OBJECTS = libpicopter_a-drone.$(OBJEXT) \
 	libpicopter_a-dronecontrol.$(OBJEXT) \
 	libpicopter_a-DroneState.$(OBJEXT) \
 	libpicopter_a-EventLoop.$(OBJEXT) \
@@ -137,8 +136,7 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-BTLEServer.Po \
-	./$(DEPDIR)/libpicopter_a-DroneState.Po \
+am__depfiles_remade = ./$(DEPDIR)/libpicopter_a-DroneState.Po \
 	./$(DEPDIR)/libpicopter_a-EventLoop.Po \
 	./$(DEPDIR)/libpicopter_a-Motors.Po \
 	./$(DEPDIR)/libpicopter_a-Simulation.Po \
@@ -310,9 +308,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 noinst_LIBRARIES = libpicopter.a
-libpicopter_a_SOURCES = BTLEServer.cpp \
-						BTLEServer.h \
-						CraftProperties.h \
+libpicopter_a_SOURCES = CraftProperties.h \
 						drone.cpp \
 						drone.h \
 						dronecontrol.cpp \
@@ -436,7 +432,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-BTLEServer.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-DroneState.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-EventLoop.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpicopter_a-Motors.Po@am__quote@ # am--include-marker
@@ -475,20 +470,6 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-libpicopter_a-BTLEServer.o: BTLEServer.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-BTLEServer.o -MD -MP -MF $(DEPDIR)/libpicopter_a-BTLEServer.Tpo -c -o libpicopter_a-BTLEServer.o `test -f 'BTLEServer.cpp' || echo '$(srcdir)/'`BTLEServer.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-BTLEServer.Tpo $(DEPDIR)/libpicopter_a-BTLEServer.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BTLEServer.cpp' object='libpicopter_a-BTLEServer.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-BTLEServer.o `test -f 'BTLEServer.cpp' || echo '$(srcdir)/'`BTLEServer.cpp
-
-libpicopter_a-BTLEServer.obj: BTLEServer.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-BTLEServer.obj -MD -MP -MF $(DEPDIR)/libpicopter_a-BTLEServer.Tpo -c -o libpicopter_a-BTLEServer.obj `if test -f 'BTLEServer.cpp'; then $(CYGPATH_W) 'BTLEServer.cpp'; else $(CYGPATH_W) '$(srcdir)/BTLEServer.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpicopter_a-BTLEServer.Tpo $(DEPDIR)/libpicopter_a-BTLEServer.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='BTLEServer.cpp' object='libpicopter_a-BTLEServer.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libpicopter_a-BTLEServer.obj `if test -f 'BTLEServer.cpp'; then $(CYGPATH_W) 'BTLEServer.cpp'; else $(CYGPATH_W) '$(srcdir)/BTLEServer.cpp'; fi`
 
 libpicopter_a-drone.o: drone.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libpicopter_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libpicopter_a-drone.o -MD -MP -MF $(DEPDIR)/libpicopter_a-drone.Tpo -c -o libpicopter_a-drone.o `test -f 'drone.cpp' || echo '$(srcdir)/'`drone.cpp
@@ -844,8 +825,7 @@ clean: clean-am
 clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
-	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
+		-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-EventLoop.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Motors.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po
@@ -906,8 +886,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/libpicopter_a-BTLEServer.Po
-	-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
+		-rm -f ./$(DEPDIR)/libpicopter_a-DroneState.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-EventLoop.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Motors.Po
 	-rm -f ./$(DEPDIR)/libpicopter_a-Simulation.Po

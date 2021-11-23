@@ -1,8 +1,6 @@
 AUTOMAKE_OPTIONS = subdir-objects
 noinst_LIBRARIES = libpicopter.a
-libpicopter_a_SOURCES = BTLEServer.cpp \
-						BTLEServer.h \
-						CraftProperties.h \
+libpicopter_a_SOURCES = CraftProperties.h \
 						drone.cpp \
 						drone.h \
 						dronecontrol.cpp \
@@ -23,6 +21,8 @@ libpicopter_a_SOURCES = BTLEServer.cpp \
 						ble/bleserver.h \
 						math/Integrators.cpp \
 						math/Integrators.h \
+						math/LowPassFilter.cpp \
+						math/LowPassFilter.h \
 						math/PIDController.cpp \
 						math/PIDController.h \
 						math/utils.cpp \
