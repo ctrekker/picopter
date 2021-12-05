@@ -36,11 +36,11 @@ Vector3f angularVelocityBias(0., 0., 0.);
 std::vector<Vector3f> calibrationAccelerations;
 std::vector<Vector3f> calibrationAngVelocities;
 
-/* control things */
+/* control things */       /* BB  RL BT  RR */
 int motorPins[MOTOR_COUNT] = {26, 6, 13, 19}; // ORDER MATTERS
 Motors motors(motorPins);
-ThrustController thrustController(9, 1, 2, 0.01);
-const float thrustGain = 25;
+ThrustController thrustController(0, 0, 0, 0, 0, 0, 0.01);
+const float thrustGain = 20;
 
 int init() {
     if(gpioInitialise() < 0) {
@@ -62,6 +62,14 @@ void calibrateMotors() {
 void setMotorThrottle(int throttle) {
     motors.setThrottle(throttle);  // sets state variable
     motors.writeSpeeds();  // actually writes pwm to escs
+}
+
+void setControllerParameters(float p1, float i1, float d1, float p2, float i2, float d2) {
+    thrustController.setParameters(p1, i1, d1, p2, i2, d2);
+}
+
+void setTargetAngle(float componentX, float componentY) {
+    std::cout << "drone.cpp: Angle set to: (" << componentX << ", " << componentY << ")" << std::endl;
 }
 
 
@@ -122,9 +130,9 @@ void readOrientationSensors() {
     Vector4f thrustAdjustments = thrustController.step(state);
     thrustAdjustments *= thrustGain;
 
-//    std::cout << thrustAdjustments(0) << ", " << thrustAdjustments(1) << ", " << thrustAdjustments(2) << ", " << thrustAdjustments(3) << std::endl;
-//    motors.setAdjustments(thrustAdjustments);
-//    motors.writeSpeeds();
+    std::cout << thrustAdjustments(0) << ", " << thrustAdjustments(1) << ", " << thrustAdjustments(2) << ", " << thrustAdjustments(3) << std::endl;
+    motors.setAdjustments(thrustAdjustments);
+    motors.writeSpeeds();
 }
 
 
@@ -136,6 +144,8 @@ void runEventLoop() {
 
     calibrateSensors();
     std::cout << "Calibration complete" << std::endl;
+
+    // setMotorThrottle(400);
 
 
     stateHistory.push_back(state);

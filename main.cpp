@@ -6,10 +6,11 @@
 int main(int argc, char **ppArgv) {
     blemain(argc, ppArgv);
 
-    init();
-    calibrateMotors();
-    setMotorThrottle(0);
-    runEventLoop();
+    // init();
+    // calibrateMotors();
+    // setMotorThrottle(0);  
+    // setControllerParameters(0.5, 0, 0.3, 0.3, 0, 0.3);
+    // runEventLoop();
 
     // do something to wait
     while (ggkGetServerRunState() < EStopping)

@@ -16,15 +16,24 @@ using namespace Eigen;
 #define mu 0.98
 
 
-float a = 1/sqrt(2);
+// float a = 1/sqrt(2);
+// Matrix<float, 2, 2> Ainv {
+//     { a, a},
+//     {-a, a}
+// };
+// Matrix<float, 3, 3> Ainv3 {
+//     { a, a, 0},
+//     {-a, a, 0},
+//     { 0, 0, 1}
+// };
 Matrix<float, 2, 2> Ainv {
-    { a, a},
-    {-a, a}
+    {1, 0},
+    {0, 1}
 };
 Matrix<float, 3, 3> Ainv3 {
-    { a, a, 0},
-    {-a, a, 0},
-    { 0, 0, 1}
+    {1, 0, 0},
+    {0, 1, 0},
+    {0, 0, 1}
 };
 
 

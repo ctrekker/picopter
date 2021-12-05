@@ -92,6 +92,8 @@
 // required by applications linking to a Gobbledegook library is to include `include/Gobbledegook.h`.
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#include "bleserver.h"
+
 #include <signal.h>
 #include <iostream>
 #include <thread>
@@ -225,6 +227,34 @@ int dataSetter(const char *pName, const void *pData)
 		setMotorThrottle(throttle);
         return 1;
     }
+	else if(strName == "controls/angle") {
+		GVariant *angleData = const_cast<GVariant *>(static_cast<const GVariant *>(pData));
+		gsize size;
+		gconstpointer angleArr = g_variant_get_fixed_array(angleData, &size, 1);
+
+		// dirty code but it works
+		//	[double, double] access using static casts of a void pointer :(
+		double componentX = *static_cast<const double *>(angleArr);
+		double componentY = *static_cast<const double *>(angleArr + 8);
+
+		setTargetAngle((float)componentX, (float)componentY);
+		return 1;
+	}
+	else if(strName == "controls/operation") {
+		// TODO: Implement device operations
+		uint8_t op = *static_cast<const uint8_t *>(pData);
+		std::cout << "Operation set to: " << std::to_string(op) << std::endl;
+		LogWarn((std::string("Operations are currently unimplemented").c_str()));
+
+		if(op == OP_HARD_RESTART) {
+
+		}
+		else if(op == OP_SOFT_RESTART) {
+
+		}
+
+		return 1;	
+	}
 
 	LogWarn((std::string("Unknown name for server data setter request: '") + pName + "'").c_str());
 
