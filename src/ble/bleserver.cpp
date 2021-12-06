@@ -98,6 +98,7 @@
 #include <iostream>
 #include <thread>
 #include <sstream>
+#include <stdlib.h>
 
 #include <Gobbledegook.h>
 #include <glib.h>
@@ -244,13 +245,12 @@ int dataSetter(const char *pName, const void *pData)
 		// TODO: Implement device operations
 		uint8_t op = *static_cast<const uint8_t *>(pData);
 		std::cout << "Operation set to: " << std::to_string(op) << std::endl;
-		LogWarn((std::string("Operations are currently unimplemented").c_str()));
 
 		if(op == OP_HARD_RESTART) {
-
+			system("reboot now");
 		}
 		else if(op == OP_SOFT_RESTART) {
-
+			exit(0);
 		}
 
 		return 1;	
